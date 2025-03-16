@@ -61,26 +61,31 @@ function pintarButacas(){
 
 /*Cuando se selecciona una localidad se comprueba si esta libre y se guarda o se borra
 de los arrays de control*/
-function seleccionar(){
-    var butacaId=this.event.target.id;
-    var index=0;
-    var indAs=0;       
-    butacaId=parseInt(butacaId.substring(6));
-    if(this.event.target.className=="libre"){
-        vendidas.push(butacaId);
-        asientos.push(butacaId);
-        this.event.target.className="seleccionado";
-        butacaSel++;
-    }
-    else{
-        index=vendidas.indexOf(butacaId);
-        vendidas.splice(index,1);
-        indAs=asientos.indexOf(butacaId);
-        asientos.splice(index,1);
-        this.event.target.className="libre";
+function seleccionar() {
+    var butacaId = this.event.target.id;
+    var index = 0;
+    var indAs = 0;
+    butacaId = parseInt(butacaId.substring(6));
+    
+    if (this.event.target.className == "libre") {
+        if (butacaSel < 5) { 
+            vendidas.push(butacaId);
+            asientos.push(butacaId);
+            this.event.target.className = "seleccionado";
+            butacaSel++;
+        } else {
+            alert("Solo puedes seleccionar un máximo de 5 asientos.");
+        }
+    } else {
+        index = vendidas.indexOf(butacaId);
+        vendidas.splice(index, 1);
+        indAs = asientos.indexOf(butacaId);
+        asientos.splice(index, 1);
+        this.event.target.className = "libre";
         butacaSel--;
     }
 }
+
 
 /*Compramos las entradas seleccionadas y se actualiza el array de localidades vendidas 
 por sala */
